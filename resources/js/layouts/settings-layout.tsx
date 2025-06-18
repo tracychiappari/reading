@@ -2,18 +2,14 @@ import {type ReactNode} from 'react';
 
 import {type NavItem} from '@/types';
 
-import {Link} from '@/components/ui/link'
 import {Heading, Subheading} from '@/components/ui/heading'
 import {Divider} from '@/components/ui/divider'
 import {
     Sidebar,
     SidebarBody,
-    SidebarHeader,
-    SidebarHeading,
     SidebarItem,
     SidebarSection
 } from "@/components/ui/sidebar";
-import {BookOpenIcon} from "@heroicons/react/16/solid";
 
 interface SettingsLayoutProps {
     children: ReactNode;
