@@ -1,9 +1,19 @@
 import {type ReactNode} from 'react';
 
-import { type NavItem } from '@/types';
+import {type NavItem} from '@/types';
 
-import { Link } from '@/components/ui/link'
-import { Heading, Subheading } from '@/components/ui/heading'
+import {Link} from '@/components/ui/link'
+import {Heading, Subheading} from '@/components/ui/heading'
+import {Divider} from '@/components/ui/divider'
+import {
+    Sidebar,
+    SidebarBody,
+    SidebarHeader,
+    SidebarHeading,
+    SidebarItem,
+    SidebarSection
+} from "@/components/ui/sidebar";
+import {BookOpenIcon} from "@heroicons/react/16/solid";
 
 interface SettingsLayoutProps {
     children: ReactNode;
@@ -30,21 +40,25 @@ const sidebarNavItems: NavItem[] = [
     },
 ];
 
-export function SettingsLayout({ children }: SettingsLayoutProps) {
+export function SettingsLayout({children}: SettingsLayoutProps) {
     return (
         <div>
             <Heading>Settings</Heading>
             <Subheading>Manage your profile and account settings</Subheading>
-
+            <Divider className="my-5" />
             <div className="flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-12">
                 <aside className="w-full max-w-xl lg:w-48">
-                    <nav className="flex flex-col space-y-1 space-x-0">
-                        {sidebarNavItems.map((item, index) => (
-                            <Link key={`${item.href}-${index}`} href={route(item.route)} prefetch>
-                                {item.title}
-                            </Link>
-                        ))}
-                    </nav>
+                    <Sidebar>
+                        <SidebarBody className="px-0 pt-0">
+                            <SidebarSection>
+                                {sidebarNavItems.map((item, index) => (
+                                    <SidebarItem key={`${item.href}-${index}`} href={route(item.route)} prefetch>
+                                        {item.title}
+                                    </SidebarItem>
+                                ))}
+                            </SidebarSection>
+                        </SidebarBody>
+                    </Sidebar>
                 </aside>
 
                 <div className="flex-1 md:max-w-2xl">

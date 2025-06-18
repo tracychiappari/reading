@@ -43,8 +43,8 @@ export default function Profile({mustVerifyEmail, status}: { mustVerifyEmail: bo
                     <Heading>Profile information</Heading>
                     <Subheading>Update your name and email address</Subheading>
 
-                    <form onSubmit={submit} className="space-y-6">
-                        <Fieldset>
+                    <form onSubmit={submit}>
+                        <Fieldset className="space-y-6">
                             <Field>
                                 <Label htmlFor="name">Name</Label>
 
@@ -99,21 +99,20 @@ export default function Profile({mustVerifyEmail, status}: { mustVerifyEmail: bo
                                     )}
                                 </div>
                             )}
-
-                            <div className="flex items-center gap-4">
-                                <Button type="submit" disabled={processing}>Save</Button>
-
-                                <Transition
-                                    show={recentlySuccessful}
-                                    enter="transition ease-in-out"
-                                    enterFrom="opacity-0"
-                                    leave="transition ease-in-out"
-                                    leaveTo="opacity-0"
-                                >
-                                    <p className="text-sm text-neutral-600">Saved</p>
-                                </Transition>
-                            </div>
                         </Fieldset>
+                        <div className="pt-6">
+                            <Button type="submit" disabled={processing}>Save</Button>
+
+                            <Transition
+                                show={recentlySuccessful}
+                                enter="transition ease-in-out"
+                                enterFrom="opacity-0"
+                                leave="transition ease-in-out"
+                                leaveTo="opacity-0"
+                            >
+                                <p className="text-sm text-neutral-600">Saved</p>
+                            </Transition>
+                        </div>
                     </form>
                 </div>
 
