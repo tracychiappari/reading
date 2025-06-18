@@ -2,11 +2,11 @@ import { Head, useForm } from '@inertiajs/react';
 import { LoaderCircle } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
-import InputError from '@/components/input-error';
+import { AuthLayout } from '@/layouts/auth-layout';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import AuthLayout from '@/layouts/auth-layout';
+import { Field, Label, ErrorMessage } from '@/components/ui/fieldset';
 
 interface ResetPasswordProps {
     token: string;
@@ -36,12 +36,12 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
     };
 
     return (
-        <AuthLayout title="Reset password" description="Please enter your new password below">
+        <AuthLayout>
             <Head title="Reset password" />
 
             <form onSubmit={submit}>
                 <div className="grid gap-6">
-                    <div className="grid gap-2">
+                    <Field>
                         <Label htmlFor="email">Email</Label>
                         <Input
                             id="email"
@@ -53,10 +53,10 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             readOnly
                             onChange={(e) => setData('email', e.target.value)}
                         />
-                        <InputError message={errors.email} className="mt-2" />
-                    </div>
+                        <ErrorMessage className="mt-2">{errors.email} </ErrorMessage>
+                    </Field>
 
-                    <div className="grid gap-2">
+                    <Field>
                         <Label htmlFor="password">Password</Label>
                         <Input
                             id="password"
@@ -69,10 +69,10 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             onChange={(e) => setData('password', e.target.value)}
                             placeholder="Password"
                         />
-                        <InputError message={errors.password} />
-                    </div>
+                        <ErrorMessage className="mt-2">{errors.password}</ErrorMessage>
+                    </Field>
 
-                    <div className="grid gap-2">
+                    <Field>
                         <Label htmlFor="password_confirmation">Confirm password</Label>
                         <Input
                             id="password_confirmation"
@@ -84,8 +84,8 @@ export default function ResetPassword({ token, email }: ResetPasswordProps) {
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             placeholder="Confirm password"
                         />
-                        <InputError message={errors.password_confirmation} className="mt-2" />
-                    </div>
+                        <ErrorMessage className="mt-2">{errors.password_confirmation}</ErrorMessage>
+                    </Field>
 
                     <Button type="submit" className="mt-4 w-full" disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
