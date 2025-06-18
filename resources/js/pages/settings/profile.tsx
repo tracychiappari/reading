@@ -1,44 +1,24 @@
 import {Transition} from '@headlessui/react';
-import {Head, Link, router, useForm, usePage} from '@inertiajs/react';
+import {useForm, usePage} from '@inertiajs/react';
 import {FormEventHandler} from 'react';
 
-import {type NavItem, type SharedData} from '@/types';
+import {type SharedData} from '@/types';
 
 import {AppLayout} from '@/layouts/app-layout'
 import {SettingsLayout} from '@/layouts/settings-layout';
 
 import {DeleteUser} from '@/components/delete-user'
 
+import {Link} from '@/components/ui/link'
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
-import {Fieldset, FieldGroup, Field, Label, ErrorMessage} from '@/components/ui/fieldset';
+import {Fieldset, Field, Label, ErrorMessage} from '@/components/ui/fieldset';
 import {Heading, Subheading} from '@/components/ui/heading'
 
 type ProfileForm = {
     name: string;
     email: string;
 };
-
-const sidebarNavItems: NavItem[] = [
-    {
-        title: 'Profile',
-        href: '/settings/profile',
-        route: 'password.edit',
-        icon: null,
-    },
-    {
-        title: 'Password',
-        href: '/settings/password',
-        route: 'password.edit',
-        icon: null,
-    },
-    {
-        title: 'Appearance',
-        href: '/settings/appearance',
-        route: 'appearance',
-        icon: null,
-    },
-];
 
 export default function Profile({mustVerifyEmail, status}: { mustVerifyEmail: boolean; status?: string }) {
     const {auth} = usePage<SharedData>().props;

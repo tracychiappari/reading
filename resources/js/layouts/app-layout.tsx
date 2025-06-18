@@ -11,7 +11,7 @@ interface AppLayoutProps {
     children: ReactNode;
 }
 
-export function AppLayout({ children, ...props }: AppLayoutProps) {
+export function AppLayout({ children }: AppLayoutProps) {
     const cleanup = useMobileNavigation();
 
     const handleLogout = () => {

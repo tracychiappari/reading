@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/navbar";
 import {BookOpenIcon} from "@heroicons/react/16/solid";
 
-export function AppNavbar(props: { onClick: () => void }) {
+export function AppNavbar() {
     return (
         <Navbar>
             <NavbarSection>

@@ -9,10 +9,10 @@ import { Field, Label, ErrorMessage } from '@/components/ui/fieldset';
 import { Dialog, DialogDescription, DialogTitle, DialogBody, DialogActions } from '@/components/ui/dialog';
 
 export function DeleteUser() {
-    let [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
 
     const passwordInput = useRef<HTMLInputElement>(null);
-    const { data, setData, delete: destroy, processing, reset, errors, clearErrors } = useForm<Required<{ password: string }>>({ password: '' });
+    const { data, setData, delete: destroy, processing, reset, errors } = useForm<Required<{ password: string }>>({ password: '' });
 
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();

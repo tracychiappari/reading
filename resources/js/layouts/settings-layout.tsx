@@ -30,7 +30,7 @@ const sidebarNavItems: NavItem[] = [
     },
 ];
 
-export function SettingsLayout({ children, ...props }: SettingsLayoutProps) {
+export function SettingsLayout({ children }: SettingsLayoutProps) {
     return (
         <div>
             <Heading>Settings</Heading>

@@ -5,7 +5,7 @@ import { AuthLayout } from '@/layouts/auth-layout';
 
 import { Button } from '@/components/ui/button'
 import { Checkbox, CheckboxField } from '@/components/ui/checkbox'
-import { Fieldset, Field, Label } from '@/components/ui/fieldset'
+import { Field, Label } from '@/components/ui/fieldset'
 import { Heading } from '@/components/ui/heading'
 import { Input } from '@/components/ui/input'
 import { Strong, Text, TextLink } from '@/components/ui/text'
@@ -18,11 +18,10 @@ type LoginForm = {
 
 interface LoginProps {
     status?: string;
-    canResetPassword: boolean;
 }
 
-export default function Login({ status, canResetPassword }: LoginProps) {
-    const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
+export default function Login({ status }: LoginProps) {
+    const { data, setData, post, reset } = useForm<Required<LoginForm>>({
         email: '',
         password: '',
         remember: false,
