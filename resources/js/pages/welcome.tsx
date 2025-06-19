@@ -12,7 +12,7 @@ export default function Welcome() {
                 <header className="mb-6 w-full max-w-[335px] text-sm not-has-[nav]:hidden lg:max-w-4xl">
                     <nav className="flex items-center justify-end gap-4">
                         {auth.user ? (
-                            <Button href={route('dashboard')}>Dashboard</Button>
+                            <Button color="indigo" href={route('dashboard')}>Dashboard</Button>
                         ) : (
                             <>
                                 <Button color="dark/white" plain href={route('login')}>Log in</Button>
