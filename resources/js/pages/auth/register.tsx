@@ -2,7 +2,7 @@ import {Head, useForm} from '@inertiajs/react';
 import {LoaderCircle} from 'lucide-react';
 import {FormEventHandler} from 'react';
 
-import {AuthLayout} from '@/layouts/auth-layout';
+import {AuthLayout} from '@/layouts/auth/layout';
 
 import {TextLink} from '@/components/ui/text';
 import {Button} from '@/components/ui/button';

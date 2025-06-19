@@ -1,11 +1,10 @@
 import {Transition} from '@headlessui/react';
-import {useForm, usePage} from '@inertiajs/react';
+import {Head, useForm, usePage} from '@inertiajs/react';
 import {FormEventHandler} from 'react';
 
 import {type SharedData} from '@/types';
 
-import {AppLayout} from '@/layouts/app-layout'
-import {SettingsLayout} from '@/layouts/settings-layout';
+import {SettingsLayout} from '@/layouts/settings/layout';
 
 import {DeleteUser} from '@/components/delete-user'
 
@@ -37,87 +36,87 @@ export default function Profile({mustVerifyEmail, status}: { mustVerifyEmail: bo
     };
 
     return (
-        <AppLayout>
-            <SettingsLayout>
-                <div className="space-y-6">
-                    <Heading>Profile information</Heading>
-                    <Subheading>Update your name and email address</Subheading>
+        <SettingsLayout>
+            <Head title="Profile settings"/>
 
-                    <form onSubmit={submit}>
-                        <Fieldset className="space-y-6">
-                            <Field>
-                                <Label htmlFor="name">Name</Label>
+            <div className="space-y-6">
+                <Heading>Profile information</Heading>
+                <Subheading>Update your name and email address</Subheading>
 
-                                <Input
-                                    id="name"
-                                    className="mt-1 block w-full"
-                                    value={data.name}
-                                    onChange={(e) => setData('name', e.target.value)}
-                                    required
-                                    autoComplete="name"
-                                    placeholder="Full name"
-                                />
+                <form onSubmit={submit}>
+                    <Fieldset className="space-y-6">
+                        <Field>
+                            <Label htmlFor="name">Name</Label>
 
-                                {errors.name && <ErrorMessage className="mt-2">{errors.name}</ErrorMessage>}
-                            </Field>
+                            <Input
+                                id="name"
+                                className="mt-1 block w-full"
+                                value={data.name}
+                                onChange={(e) => setData('name', e.target.value)}
+                                required
+                                autoComplete="name"
+                                placeholder="Full name"
+                            />
 
-                            <Field>
-                                <Label htmlFor="email">Email address</Label>
+                            {errors.name && <ErrorMessage className="mt-2">{errors.name}</ErrorMessage>}
+                        </Field>
 
-                                <Input
-                                    id="email"
-                                    type="email"
-                                    className="mt-1 block w-full"
-                                    value={data.email}
-                                    onChange={(e) => setData('email', e.target.value)}
-                                    required
-                                    autoComplete="username"
-                                    placeholder="Email address"
-                                />
+                        <Field>
+                            <Label htmlFor="email">Email address</Label>
 
-                                {errors.email && <ErrorMessage className="mt-2">{errors.email}</ErrorMessage>}
-                            </Field>
+                            <Input
+                                id="email"
+                                type="email"
+                                className="mt-1 block w-full"
+                                value={data.email}
+                                onChange={(e) => setData('email', e.target.value)}
+                                required
+                                autoComplete="username"
+                                placeholder="Email address"
+                            />
 
-                            {mustVerifyEmail && auth.user.email_verified_at === null && (
-                                <div>
-                                    <p className="-mt-4 text-sm text-muted-foreground">
-                                        Your email address is unverified.{' '}
-                                        <Link
-                                            href={route('verification.send')}
-                                            method="post"
-                                            as="button"
-                                            className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
-                                        >
-                                            Click here to resend the verification email.
-                                        </Link>
-                                    </p>
+                            {errors.email && <ErrorMessage className="mt-2">{errors.email}</ErrorMessage>}
+                        </Field>
 
-                                    {status === 'verification-link-sent' && (
-                                        <div className="mt-2 text-sm font-medium text-green-600">
-                                            A new verification link has been sent to your email address.
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-                        </Fieldset>
-                        <div className="pt-6">
-                            <Button type="submit" disabled={processing}>Save</Button>
+                        {mustVerifyEmail && auth.user.email_verified_at === null && (
+                            <div>
+                                <p className="-mt-4 text-sm text-muted-foreground">
+                                    Your email address is unverified.{' '}
+                                    <Link
+                                        href={route('verification.send')}
+                                        method="post"
+                                        as="button"
+                                        className="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+                                    >
+                                        Click here to resend the verification email.
+                                    </Link>
+                                </p>
 
-                            <Transition
-                                show={recentlySuccessful}
-                                enter="transition ease-in-out"
-                                enterFrom="opacity-0"
-                                leave="transition ease-in-out"
-                                leaveTo="opacity-0"
-                            >
-                                <p className="text-sm text-neutral-600">Saved</p>
-                            </Transition>
-                        </div>
-                    </form>
-                </div>
+                                {status === 'verification-link-sent' && (
+                                    <div className="mt-2 text-sm font-medium text-green-600">
+                                        A new verification link has been sent to your email address.
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </Fieldset>
+                    <div className="pt-6">
+                        <Button type="submit" disabled={processing}>Save</Button>
 
-                <DeleteUser />
-            </SettingsLayout>
-        </AppLayout>
+                        <Transition
+                            show={recentlySuccessful}
+                            enter="transition ease-in-out"
+                            enterFrom="opacity-0"
+                            leave="transition ease-in-out"
+                            leaveTo="opacity-0"
+                        >
+                            <p className="text-sm text-neutral-600">Saved</p>
+                        </Transition>
+                    </div>
+                </form>
+            </div>
+
+            <DeleteUser/>
+        </SettingsLayout>
     );
 }

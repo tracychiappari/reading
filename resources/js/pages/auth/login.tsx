@@ -1,7 +1,7 @@
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-import { AuthLayout } from '@/layouts/auth-layout';
+import { AuthLayout } from '@/layouts/auth/layout';
 
 import { Button } from '@/components/ui/button'
 import { Checkbox, CheckboxField } from '@/components/ui/checkbox'
