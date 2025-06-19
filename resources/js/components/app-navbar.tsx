@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/navbar";
 import {BookOpenIcon} from "@heroicons/react/16/solid";
 
-export function AppNavbar() {
+export function AppNavbar(props: { onClick: () => void }) {
     return (
         <Navbar>
             <NavbarSection>
@@ -13,6 +13,7 @@ export function AppNavbar() {
                     <BookOpenIcon className="size-8 text-indigo-500"/>
                 </NavbarItem>
                 <NavbarItem href={route("dashboard")}>Dashboard</NavbarItem>
+                <NavbarItem method="post" href={route("logout")} onClick={props.onClick}>Logout</NavbarItem>
             </NavbarSection>
         </Navbar>
     );
