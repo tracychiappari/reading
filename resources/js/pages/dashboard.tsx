@@ -3,7 +3,7 @@ import {AppLayout} from "@/layouts/app-layout";
 export default function Dashboard() {
     return (
         <AppLayout>
-            <div className="mx-auto max-w-6xl"></div>
+            <div className="max-w-6xl">Contents</div>
         </AppLayout>
     )
 }
