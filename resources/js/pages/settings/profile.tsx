@@ -13,6 +13,7 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Fieldset, Field, Label, ErrorMessage} from '@/components/ui/fieldset';
 import {Heading, Subheading} from '@/components/ui/heading'
+import {UpdateAvatar} from "@/components/update-avatar";
 
 type ProfileForm = {
     name: string;
@@ -115,6 +116,8 @@ export default function Profile({mustVerifyEmail, status}: { mustVerifyEmail: bo
                     </div>
                 </form>
             </div>
+
+            <UpdateAvatar/>
 
             <DeleteUser/>
         </SettingsLayout>
