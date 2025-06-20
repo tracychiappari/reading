@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Settings\AvatarController;
+use App\Http\Controllers\Settings\ExportController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::put('settings/password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::patch('settings/avatar', [AvatarController::class, 'update'])->name('avatar.update');
+
+    Route::get('settings/export', [ExportController::class, 'show'])->name('export.show');
 
     Route::get('settings/appearance', function () {
         return Inertia::render('settings/appearance');

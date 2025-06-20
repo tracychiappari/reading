@@ -36,6 +36,12 @@ const sidebarNavItems: NavItem[] = [
         route: 'appearance',
         icon: null,
     },
+    {
+        title: 'Export',
+        href: '/settings/export',
+        route: 'export.show',
+        icon: null,
+    },
 ];
 
 export function SettingsLayout({children}: SettingsLayoutProps) {
