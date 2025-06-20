@@ -3,7 +3,7 @@ import {FormEventHandler} from "react";
 import type {SharedData} from "@/types";
 
 import { Avatar } from '@/components/ui/avatar';
-import {Field, Label, ErrorMessage} from '@/components/ui/fieldset';
+import {Field, ErrorMessage} from '@/components/ui/fieldset';
 import {Button} from "@/components/ui/button";
 
 type AvatarForm = {
