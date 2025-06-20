@@ -1,5 +1,6 @@
-import { usePage } from '@inertiajs/react';
-import { type SharedData } from '@/types';
+import {usePage} from '@inertiajs/react';
+import {type SharedData} from '@/types';
+import {getInitials} from "@/lib/utils";
 
 import {
     Sidebar,
@@ -25,19 +26,8 @@ import {
 } from '@heroicons/react/16/solid';
 import {Avatar} from "@/components/ui/avatar";
 
-const getInitials = (fullName) => {
-    const allNames = fullName.trim().split(' ');
-    const initials = allNames.reduce((acc, curr, index) => {
-        if(index === 0 || index === allNames.length - 1){
-            acc = `${acc}${curr.charAt(0).toUpperCase()}`;
-        }
-        return acc;
-    }, '');
-    return initials;
-}
-
 export function AppSidebar(props: { onClick: () => void }) {
-    const { auth } = usePage<SharedData>().props;
+    const {auth} = usePage<SharedData>().props;
 
     const initials = getInitials(auth.user.name);
 
@@ -56,9 +46,11 @@ export function AppSidebar(props: { onClick: () => void }) {
                     <Dropdown>
                         <DropdownButton as={SidebarItem}>
                             <span className="flex min-w-0 items-center gap-3">
-                                <Avatar initials={initials} className="size-10" alt=""/>
+                                <Avatar src={`/storage/${auth.user.avatar}`} initials={initials} className="size-10" alt=""/>
                                 <span className="min-w-0">
-                                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">{auth.user.name}</span>
+                                    <span className="block truncate text-sm/5 font-medium text-zinc-950 dark:text-white">
+                                        {auth.user.name}
+                                    </span>
                                     <span className="block truncate text-xs/5 font-normal text-zinc-500 dark:text-zinc-400">
                                       {auth.user.email}
                                     </span>
