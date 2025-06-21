@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
             'password' => 'Testing!23'
         ]);
 
+        User::factory()->create([
+            'name' => 'Another User',
+            'email' => 'another@example.com',
+            'password' => 'Testing!23'
+        ]);
+
         // Seed books
-        $this->call(BookSeeder::class);
+        // $this->call(BookSeeder::class);
     }
 }
