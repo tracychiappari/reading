@@ -6,7 +6,7 @@ import {
     Sidebar,
     SidebarBody,
     SidebarFooter,
-    SidebarHeader,
+    SidebarHeader, SidebarHeading,
     SidebarItem,
     SidebarSection
 } from "@/components/ui/sidebar";
@@ -39,6 +39,10 @@ export function AppSidebar(props: { onClick: () => void }) {
             <SidebarBody>
                 <SidebarSection>
                     <SidebarItem href={route("dashboard")}>Dashboard</SidebarItem>
+                </SidebarSection>
+                <SidebarSection>
+                    <SidebarHeading>Books</SidebarHeading>
+                    <SidebarItem href={route("books.index")}>List</SidebarItem>
                 </SidebarSection>
             </SidebarBody>
             <SidebarFooter>

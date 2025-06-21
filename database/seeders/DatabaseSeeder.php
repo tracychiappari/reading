@@ -15,10 +15,14 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Seed test user
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => 'Testing!23'
         ]);
+
+        // Seed books
+        $this->call(BookSeeder::class);
     }
 }
