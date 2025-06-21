@@ -3,8 +3,10 @@ import {FormEventHandler} from "react";
 import type {SharedData} from "@/types";
 
 import { Avatar } from '@/components/ui/avatar';
-import {Field, ErrorMessage} from '@/components/ui/fieldset';
+import { Field, ErrorMessage, Label } from '@/components/ui/fieldset';
 import {Button} from "@/components/ui/button";
+import { Upload } from '@/components/ui/upload';
+import { Heading, Subheading } from '@/components/ui/heading';
 
 type AvatarForm = {
     _method: string,
@@ -30,27 +32,32 @@ export function UpdateAvatar() {
     };
 
     return (
-        <form onSubmit={submit} encType="multipart/form-data">
-            {auth.user.avatar && (
-                <Avatar className="size-15" src={`/storage/${auth.user.avatar}`} />
-            )}
+        <div className="space-y-6">
+            <Heading>Avatar</Heading>
+            <Subheading>Upload image to use as your avatar.</Subheading>
 
-            <Field>
-                <input
-                    type="file"
-                    onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) setData('avatar', file);
-                    }}
-                    className="mb-2"
-                />
+            <form onSubmit={submit} encType="multipart/form-data">
+                {auth.user.avatar && (
+                    <Avatar className="size-15 mb-6" src={`/storage/${auth.user.avatar}`} />
+                )}
 
-                {errors.avatar && <ErrorMessage>{errors.avatar}</ErrorMessage>}
-            </Field>
+                <Field>
+                    <Upload
+                        id="avatar"
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) setData('avatar', file);
+                        }}
+                    />
+                    {errors.avatar && <ErrorMessage>{errors.avatar}</ErrorMessage>}
+                </Field>
 
-            <Button type="submit">
-                {progress ? `Uploading... ${progress.percentage}%` : 'Upload Avatar'}
-            </Button>
-        </form>
+                <div className="pt-6">
+                    <Button type="submit">
+                        {progress ? `Uploading... ${progress.percentage}%` : 'Upload Avatar'}
+                    </Button>
+                </div>
+            </form>
+        </div>
     );
 }
