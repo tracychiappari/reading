@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { Perusal } from '@/types/models';
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
@@ -15,3 +16,14 @@ export const getInitials = (fullName: string) => {
     }, '');
     return initials;
 }
+
+export const formatStatus = (status: Perusal['status']) => {
+    const statusMap = {
+        not_started: 'Not Started',
+        in_progress: 'In Progress',
+        completed: 'Completed',
+        abandoned: 'Abandoned'
+    };
+
+    return statusMap[status] || status;
+};

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
+use App\Http\Requests\Books\StoreBookRequest;
+use App\Http\Requests\Books\UpdateBookRequest;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -16,8 +16,12 @@ class BookController extends Controller
      */
     public function index(): Response
     {
+        if (Auth::user()->cannot('viewAny', Book::class)) {
+            abort(403);
+        }
+
         return Inertia::render('books/index', [
-            'books' => Auth::user()->books()->latest()->get()
+            'books' => Auth::user()->books()->with('perusals')->latest()->get()
         ]);
     }
 
@@ -26,6 +30,10 @@ class BookController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->cannot('create', Book::class)) {
+            abort(403);
+        }
+
         return Inertia::render('books/create', []);
     }
 
@@ -34,6 +42,10 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
+        if (Auth::user()->cannot('create', Book::class)) {
+            abort(403);
+        }
+
         // Get the validated data from the request
         $validated = $request->validated();
 

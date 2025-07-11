@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Perusals;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreBookRequest extends FormRequest
+class StorePerusalRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return false;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -14,9 +22,7 @@ class StoreBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required','string','max:255'],
-            'author' => ['required','string','max:255'],
-            'cover' => ['nullable','image','max:2048']
+            //
         ];
     }
 }

@@ -1,10 +1,13 @@
+// Libraries
 import { Head, useForm } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, ReactNode } from 'react';
 
+// Layouts
 import { AppLayout } from '@/layouts/app-layout';
+
+// Components
 import { Heading, Subheading } from '@/components/ui/heading';
 import { ErrorMessage, Field, Fieldset, Label } from '@/components/ui/fieldset';
-
 import { Input } from '@/components/ui/input';
 import { Upload } from '@/components/ui/upload';
 import { Button } from '@/components/ui/button';
@@ -14,7 +17,7 @@ interface BookForm {
     author: string;
     cover: File | null;
 }
-export default function Create() {
+export default function Create(): ReactNode {
     const {data, setData, post, errors, processing} = useForm<Required<BookForm>>({
         'title': '',
         'author': '',

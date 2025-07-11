@@ -1,25 +1,20 @@
+// Libraries
 import { Head, useForm } from '@inertiajs/react';
+import { FormEventHandler, ReactNode } from 'react';
+
+// Types
+import { Book } from '@/types/models';
+
+// Layouts
+import { AppLayout } from '@/layouts/app-layout';
+
+// Components
 import { Heading, Subheading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
-import { AppLayout } from '@/layouts/app-layout';
-import { FormEventHandler } from 'react';
 import { Description, ErrorMessage, Field, Fieldset, Label } from '@/components/ui/fieldset';
 import { Input } from '@/components/ui/input';
 import { Upload } from '@/components/ui/upload';
 import { DeleteBook } from '@/components/delete-book';
-
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    cover: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
-interface Props {
-    book: Book;
-}
 
 interface BookForm {
     _method: string;
@@ -28,7 +23,7 @@ interface BookForm {
     cover: File | null;
 }
 
-export default function Edit({ book }: Props) {
+export default function Edit({ book }: { book: Book }): ReactNode {
     const {data, setData, post, errors, processing} = useForm<Required<BookForm>>({
         '_method': 'patch',
         'title': book.title,

@@ -1,22 +1,18 @@
+// Libraries
 import { Head } from '@inertiajs/react';
-import { Heading } from '@/components/ui/heading';
+import { ReactNode } from 'react';
+
+// Types
+import { Book } from '@/types/models';
+
+// Layouts
 import { AppLayout } from '@/layouts/app-layout';
+
+// Components
+import { Heading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
 
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    cover: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
-interface Props {
-    book: Book;
-}
-
-export default function Show({ book }: Props) {
+export default function Show({ book }: { book: Book }): ReactNode {
     return (
         <AppLayout>
             <Head title="Book" />

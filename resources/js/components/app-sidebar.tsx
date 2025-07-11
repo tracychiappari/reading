@@ -43,6 +43,7 @@ export function AppSidebar(props: { onClick: () => void }) {
                 <SidebarSection>
                     <SidebarHeading>Books</SidebarHeading>
                     <SidebarItem href={route("books.index")}>List</SidebarItem>
+                    <SidebarItem href={route("perusals.index")}>Perusals</SidebarItem>
                 </SidebarSection>
             </SidebarBody>
             <SidebarFooter>

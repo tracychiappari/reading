@@ -1,23 +1,20 @@
-import { AppLayout } from '@/layouts/app-layout';
+// Libraries
 import { Head } from '@inertiajs/react';
+import { ReactNode } from 'react';
+import { formatStatus } from '@/lib/utils';
+
+// Types
+import { Book } from '@/types/models';
+
+// Layouts
+import { AppLayout } from '@/layouts/app-layout';
+
+// Components
 import { Heading } from '@/components/ui/heading';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    cover: string | null;
-    created_at: string;
-    updated_at: string;
-}
-
-interface Props {
-    books: Book[];
-}
-
-export default function Index({ books }: Props) {
+export default function Index({ books }: { books: Book[] }): ReactNode {
     return (
         <AppLayout>
             <Head title="Books"></Head>
@@ -32,6 +29,7 @@ export default function Index({ books }: Props) {
                             <TableHeader>Cover</TableHeader>
                             <TableHeader>Title</TableHeader>
                             <TableHeader>Author</TableHeader>
+                            <TableHeader>Perusals</TableHeader>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -56,6 +54,11 @@ export default function Index({ books }: Props) {
                                 </TableCell>
                                 <TableCell>{book.title}</TableCell>
                                 <TableCell>{book.author}</TableCell>
+                                <TableCell>
+                                    {book.perusals && book.perusals.map((perusal) => (
+                                        <div>{formatStatus(perusal.status)}</div>
+                                    ))}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
