@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Perusals\StorePerusalRequest;
 use App\Http\Requests\Perusals\UpdatePerusalRequest;
+use App\Models\Book;
 use App\Models\Perusal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,15 +15,15 @@ class PerusalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
         if (Auth::user()->cannot('viewAny', Perusal::class)) {
             abort(403);
         }
 
-        if ($request->status == 'in_progress') {
+        if (request()->status == 'in_progress') {
             $perusals = Auth::user()->perusals()->with('book')->reading()->latest()->get();
-        } else if ($request->status == 'not_started') {
+        } else if (request()->status == 'not_started') {
             $perusals = Auth::user()->perusals()->with('book')->pending()->latest()->get();
         } else {
             $perusals = Auth::user()->perusals()->with('book')->latest()->get();
@@ -42,7 +43,19 @@ class PerusalController extends Controller
             abort(403);
         }
 
-        return Inertia::render('perusals/create', []);
+        $book_id = request()->book_id;
+        if (!$book_id) {
+            abort(403); // TODO: Change HTTP code?
+        }
+
+        $book = Book::find($book_id);
+        if (!$book) {
+            abort(403); // TODO: Change HTTP code?
+        }
+
+        return Inertia::render('perusals/create', [
+            'book' => $book
+        ]);
     }
 
     /**
@@ -50,7 +63,27 @@ class PerusalController extends Controller
      */
     public function store(StorePerusalRequest $request)
     {
-        //
+        if (Auth::user()->cannot('create', Perusal::class)) {
+            abort(403);
+        }
+
+        // Get the validated data from the request
+        $validated = $request->validated();
+
+        $perusal = new Perusal;
+        $perusal->status = $validated['status'];
+        $perusal->started_at = $validated['started_at'];
+        $perusal->finished_at = $validated['finished_at'];
+
+        $book = Book::find($validated['book_id']);
+        if (!$book) {
+            abort(403);
+        }
+        $book->perusals()->save($perusal);
+
+        // Redirect to the books index page with a success message
+        return to_route('perusals.index')
+            ->with('message', 'Perusal created successfully');
     }
 
     /**

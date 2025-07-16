@@ -19,7 +19,10 @@ export default function Show({ book }: { book: Book }): ReactNode {
             <div className="max-w-6xl">
                 <div className="flex justify-between items-center">
                     <Heading>{book.title}</Heading>
-                    <Button color="indigo" href={route('books.edit', {id: book.id})}>Edit Book</Button>
+                    <div className="space-x-3">
+                        <Button color="indigo" href={route('perusals.create', {'book_id': book.id})}>Add Perusal</Button>
+                        <Button color="indigo" href={route('books.edit', {id: book.id})}>Edit Book</Button>
+                    </div>
                 </div>
                 <div className="flex justify-start items-start">
                     <div className="p-6 pl-0">

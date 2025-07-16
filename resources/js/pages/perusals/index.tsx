@@ -21,7 +21,6 @@ export default function Index({ perusals }: { perusals: Perusal[] }): ReactNode 
             <div className="max-w-6xl">
                 <div className="flex justify-between items-center">
                     <Heading>Perusals</Heading>
-                    <Button color="indigo" href={route('perusals.create')}>Add Perusal</Button>
                 </div>
                 <Table>
                     <TableHead>
@@ -44,7 +43,13 @@ export default function Index({ perusals }: { perusals: Perusal[] }): ReactNode 
                                         day: 'numeric'
                                     }) : ''}
                                 </TableCell>
-                                <TableCell>{perusal.finished_at}</TableCell>
+                                <TableCell>
+                                    {perusal.finished_at ? new Date(perusal.finished_at).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    }) : ''}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
