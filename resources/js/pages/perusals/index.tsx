@@ -11,7 +11,6 @@ import { AppLayout } from '@/layouts/app-layout';
 // Components
 import { Head } from '@inertiajs/react';
 import { Heading } from '@/components/ui/heading';
-import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 export default function Index({ perusals }: { perusals: Perusal[] }): ReactNode {
