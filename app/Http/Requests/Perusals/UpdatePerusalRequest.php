@@ -14,7 +14,9 @@ class UpdatePerusalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'status' => ['required','string','max:255'],
+            'started_at' => ['date'],
+            'finished_at' => ['date']
         ];
     }
 }

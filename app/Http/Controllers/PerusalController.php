@@ -105,7 +105,13 @@ class PerusalController extends Controller
      */
     public function edit(Perusal $perusal)
     {
-        //
+        if (Auth::user()->cannot('update', $perusal)) {
+            abort(403);
+        }
+
+        return Inertia::render('perusals/edit', [
+            'perusal' => $perusal,
+        ]);
     }
 
     /**
@@ -113,7 +119,23 @@ class PerusalController extends Controller
      */
     public function update(UpdatePerusalRequest $request, Perusal $perusal)
     {
-        //
+        if (Auth::user()->cannot('update', $perusal)) {
+            abort(403);
+        }
+
+        // Get the validated data from the request
+        $validated = $request->validated();
+
+        // Unset book_id if it is sent, just in case
+        unset($validated['book_id']);
+
+        // Update the perusal associated with the authenticated user
+        $perusal->update($validated);
+        $perusal->save();
+
+        // Redirect to the books index page with a success message
+        return to_route('perusals.show', $perusal)
+            ->with('message', 'Perusal updated successfully');
     }
 
     /**
@@ -121,6 +143,12 @@ class PerusalController extends Controller
      */
     public function destroy(Perusal $perusal)
     {
-        //
+        if (Auth::user()->cannot('delete', $perusal)) {
+            abort(403);
+        }
+
+        $perusal->delete();
+        return to_route('perusals.index')
+            ->with('message', 'Perusal deleted successfully');
     }
 }
