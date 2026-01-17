@@ -1,6 +1,7 @@
 // Libraries
 import { Head } from '@inertiajs/react';
 import { ReactNode } from 'react';
+import { formatStatus } from '@/lib/utils';
 
 // Types
 import { Book } from '@/types/models';
@@ -11,8 +12,10 @@ import { AppLayout } from '@/layouts/app-layout';
 // Components
 import { Heading } from '@/components/ui/heading';
 import { Button } from '@/components/ui/button';
+import { Link } from '@/components/ui/link';
 
 export default function Show({ book }: { book: Book }): ReactNode {
+    console.log(book);
     return (
         <AppLayout>
             <Head title="Book" />
@@ -42,6 +45,15 @@ export default function Show({ book }: { book: Book }): ReactNode {
                         {book.title} | {book.author}
                     </div>
                 </div>
+                {book.perusals && (
+                    <div>
+                        <ul>
+                            {book.perusals.map((perusal) => (
+                                <li key={perusal.id}><Link href={route(`perusals.show`, {id: perusal.id})}>Perusal: {formatStatus(perusal.status)} - {perusal.started_at ? new Date(perusal.started_at).toLocaleDateString() : ''}</Link></li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
             </div>
         </AppLayout>
     );

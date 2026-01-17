@@ -72,6 +72,8 @@ class BookController extends Controller
             abort(403);
         }
 
+        $book->load('perusals');
+
         return Inertia::render('books/show', [
             'book' => $book,
         ]);
